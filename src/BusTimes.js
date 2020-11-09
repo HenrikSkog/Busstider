@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import createEnturService from "@entur/sdk";
+import React, { useEffect, useState } from 'react';
+import createEnturService from '@entur/sdk';
 
 const service = createEnturService({
-  clientName: "busstider",
+  clientName: 'busstider',
 });
 
 // Endre dette til lengden på turen
@@ -24,20 +24,19 @@ const BusTimes = () => {
         'NSR:StopPlace:44085',
         // Viser her 9 resultat; endre dette om ønskelig
         { limit: 9 }
-      )
-      setBusStations(stops)
-      console.log('Setting stops')
+      );
+      setBusStations(stops);
     }
 
-    generateStops()
-    const newStopsInterval = setInterval(generateStops, 1000)
+    generateStops();
+    const newStopsInterval = setInterval(generateStops, 1000);
 
-    return () => clearInterval(newStopsInterval)
-  }, [])
+    return () => clearInterval(newStopsInterval);
+  }, []);
 
   return (
     <div className="routes">
-      {busStation.map((route) => {
+      {busStation.map(route => {
         return <Route key={route.serviceJourney.id} route={route} />;
       })}
     </div>
@@ -46,7 +45,7 @@ const BusTimes = () => {
 
 export default BusTimes;
 
-const Route = (props) => {
+const Route = props => {
   const route = props.route;
 
   let arrival_at_destination;
@@ -77,11 +76,11 @@ const Route = (props) => {
   ) {
     arrival_at_destination = new Date(
       // Had to add milliseconds for Safari support
-      route.aimedArrivalTime.slice(0, 19) + ".000+01:00"
+      route.aimedArrivalTime.slice(0, 19) + '.000+01:00'
     );
   } else {
     arrival_at_destination = new Date(
-      route.expectedDepartureTime.slice(0, 19) + ".000+01:00"
+      route.expectedDepartureTime.slice(0, 19) + '.000+01:00'
     );
   }
 
