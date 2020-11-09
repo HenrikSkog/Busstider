@@ -1,8 +1,9 @@
 import BusTimes from './BusTimes';
 import Clock from './Clock';
 import './css/style.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RouteForm from './RouteForm';
+import locationAutocomplete from './locationAutocomplete';
 
 // Endre disse til egne verdier
 
@@ -10,6 +11,14 @@ function App() {
   const app_name = 'Busstider';
   const [departingFrom, setDepartingFrom] = useState('Ila');
   const [arrivingAt, setArrivingAt] = useState('Gløshaugen');
+
+  useEffect(() => {
+    async function getAutoComplete() {
+      const data = await locationAutocomplete(departingFrom);
+      console.log(data);
+    }
+    getAutoComplete();
+  }, [departingFrom]);
 
   return (
     <div className="App">
