@@ -131,3 +131,6 @@ hr {
 .autoCompleteSuggestion {
   font-size: 0.3em;
 }
+.autoCompleteSuggestion:hover {
+  cursor: pointer;
+}

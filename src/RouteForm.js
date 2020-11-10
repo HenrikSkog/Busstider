@@ -16,8 +16,6 @@ export default function RouteForm(props) {
     }
     getAutoComplete();
   }, [departingFromQuery]);
-
-  console.log(autoComplete);
   return (
     <>
       <input
@@ -35,9 +33,12 @@ export default function RouteForm(props) {
           <div
             className="autoCompleteSuggestion"
             key={feature.id}
-            onClick={() => props.setDepartingFrom(feature.id)}
+            onClick={() => {
+              props.setDepartingID(feature.id);
+              props.setDepartingFrom(feature.name);
+            }}
           >
-            {feature.name}
+            {`${feature.name}, ${feature.city}`}
           </div>
         );
       })}

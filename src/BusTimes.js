@@ -20,8 +20,8 @@ const BusTimes = props => {
         https://developer.entur.org/pages-geocoder-intro
         
           */
-        'NSR:StopPlace:60890',
-        'NSR:StopPlace:44085',
+        props.departingID,
+        props.arrivalID,
         // Viser her 9 resultat; endre dette om ønskelig
         { limit: 9 }
       );
@@ -32,7 +32,7 @@ const BusTimes = props => {
     const newStopsInterval = setInterval(generateStops, 1000);
 
     return () => clearInterval(newStopsInterval);
-  }, []);
+  }, [props.departingID]);
 
   return (
     <div className="routes">
