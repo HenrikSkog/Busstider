@@ -8,7 +8,7 @@ const service = createEnturService({
 // Endre dette til lengden på turen
 const route_length = 10;
 
-const BusTimes = () => {
+const BusTimes = props => {
   const [busStation, setBusStations] = useState([]);
 
   useEffect(() => {

@@ -127,3 +127,7 @@ hr {
   font-size: 3em;
   margin: 10px 0 20px 0;
 }
+
+.autoCompleteSuggestion {
+  font-size: 0.3em;
+}
