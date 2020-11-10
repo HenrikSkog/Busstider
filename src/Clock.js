@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-const Clock = () => {
+export default function Clock() {
   const [clock, setClock] = useState(new Date());
 
   useEffect(() => {
@@ -10,7 +10,5 @@ const Clock = () => {
     return () => clearInterval(updateClock);
   }, [clock]);
 
-  return clock.toTimeString().slice(0, 8);
-};
-
-export default Clock;
+  return <div>{clock.toTimeString().slice(0, 8)}</div>;
+}

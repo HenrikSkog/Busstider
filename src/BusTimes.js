@@ -9,7 +9,7 @@ const service = createEnturService({
 const route_length = 10;
 
 const BusTimes = props => {
-  const [busStation, setBusStations] = useState([]);
+  const [busStations, setBusStations] = useState([]);
 
   useEffect(() => {
     async function generateStops() {
@@ -32,11 +32,11 @@ const BusTimes = props => {
     const newStopsInterval = setInterval(generateStops, 5000);
 
     return () => clearInterval(newStopsInterval);
-  }, [props.departingFromID]);
+  }, [props.departingFromID, props.arrivingAtID]);
 
   return (
     <div className="routes">
-      {busStation.map(route => {
+      {busStations.map(route => {
         return <Route key={route.serviceJourney.id} route={route} />;
       })}
     </div>

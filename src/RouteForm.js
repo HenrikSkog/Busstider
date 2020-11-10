@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import RouteContext from './RouteContext';
 import InputWithAutoComplete from './InputWithAutoComplete';
 
 export default function RouteForm() {
   const {
-    departingFrom,
     setDepartingFrom,
-    arrivingAt,
     setArrivingAt,
-    departingFromID,
     setDepartingFromID,
-    arrivingAtID,
     setArrivingAtID,
     changeRoute,
     setChangeRoute,
