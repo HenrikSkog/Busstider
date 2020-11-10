@@ -4,6 +4,7 @@ import './css/style.css';
 import React, { useState, useContext } from 'react';
 import RouteForm from './RouteForm';
 import locationAutocomplete from './locationAutocomplete';
+import RouteContex from './RouteContext';
 
 // Endre disse til egne verdier
 
@@ -16,34 +17,42 @@ function App() {
   const [arrivalID, setArrivalID] = useState('NSR:StopPlace:44085');
 
   return (
-    <div className="App">
-      <div className="container">
-        <div className="header">
-          <h1>
-            {departingFrom} til {arrivingAt}
-          </h1>
-          <h1 className="logo">{app_name}#</h1>
-        </div>
+    <RouteContex.Provider
+      value={{
+        departingFrom,
+        setDepartingFrom,
+        arrivingAt,
+        setArrivingAt,
+        departingID,
+        setDepartingID,
+        arrivalID,
+        setArrivalID,
+      }}
+    >
+      <div className="App">
+        <div className="container">
+          <div className="header">
+            <h1>
+              {departingFrom} til {arrivingAt}
+            </h1>
+            <h1 className="logo">{app_name}#</h1>
+          </div>
 
-        <h1 className="clock">
-          <RouteForm
-            setDepartingFrom={setDepartingFrom}
-            setDepartingID={setDepartingID}
-            setArrivalID={setArrivalID}
-            setArrivingAt={setArrivingAt}
-          />
-          <Clock />
-        </h1>
-        <div className="routesHeader">
-          <h3>Linje</h3>
-          <h3>Rute</h3>
-          <h3>Ankommer {departingFrom}</h3>
-          <h3>Ankommer {arrivingAt}</h3>
+          <h1 className="clock">
+            <RouteForm />
+            <Clock />
+          </h1>
+          <div className="routesHeader">
+            <h3>Linje</h3>
+            <h3>Rute</h3>
+            <h3>Ankommer {departingFrom}</h3>
+            <h3>Ankommer {arrivingAt}</h3>
+          </div>
+          <hr />
+          <BusTimes arrivalID={arrivalID} departingID={departingID} />
         </div>
-        <hr />
-        <BusTimes arrivalID={arrivalID} departingID={departingID} />
       </div>
-    </div>
+    </RouteContex.Provider>
   );
 }
 

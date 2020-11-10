@@ -8,7 +8,7 @@ export default async function locationAutocomplete(queryString) {
   const busFeatures = features
     .filter(feature => {
       try {
-        return feature.properties.category[0] === 'onstreetBus';
+        return feature.properties.source_id.slice(0, 14) === 'NSR:StopPlace:';
       } catch (e) {
         return false;
       }

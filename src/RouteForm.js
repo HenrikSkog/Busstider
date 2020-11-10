@@ -1,13 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import RouteContext from './RouteContext';
 import locationAutocomplete from './locationAutocomplete';
 
-export default function RouteForm(props) {
+export default function RouteForm() {
+  const {
+    setDepartingID,
+    setDepartingFrom,
+    setArrivalID,
+    setArrivalFrom,
+  } = useContext(RouteContext);
+
   const [autoComplete, setAutoComplete] = useState([]);
 
   const [departingFromQuery, setDepartingFromQuery] = useState(
     'Weidemannsveien'
   );
-  const [arrivingAtQuery, setArrivingAtQuery] = useState('');
+  const [arrivingAtQuery, setArrivingAtQuery] = useState('Høgskoleringen');
 
   useEffect(() => {
     async function getAutoComplete() {
@@ -15,7 +23,7 @@ export default function RouteForm(props) {
       setAutoComplete(data);
     }
     getAutoComplete();
-  }, [departingFromQuery]);
+  }, [departingFromQuery, arrivingAtQuery]);
   return (
     <>
       <input
@@ -34,8 +42,8 @@ export default function RouteForm(props) {
             className="autoCompleteSuggestion"
             key={feature.id}
             onClick={() => {
-              props.setDepartingID(feature.id);
-              props.setDepartingFrom(feature.name);
+              setDepartingID(feature.id);
+              setDepartingFrom(feature.name);
             }}
           >
             {`${feature.name}, ${feature.city}`}
