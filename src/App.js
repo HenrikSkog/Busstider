@@ -1,20 +1,36 @@
 import BusTimes from './BusTimes';
 import Clock from './Clock';
 import './css/style.css';
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import RouteForm from './RouteForm';
-import locationAutocomplete from './locationAutocomplete';
 import RouteContex from './RouteContext';
+import ToggleChangeRoute from './ToggleChangeRoute';
+import useLocalStorage from './useLocalStorage';
 
 // Endre disse til egne verdier
 
 function App() {
   const app_name = 'Busstider';
-  const [departingFrom, setDepartingFrom] = useState('Ila');
-  const [arrivingAt, setArrivingAt] = useState('Gløshaugen');
+  // custom hook thats equivalent to useState, but persists state in localstorage. Arugments taken are local storage key and initial state value
+  const [departingFrom, setDepartingFrom] = useLocalStorage(
+    'departingFromName',
+    'Ila'
+  );
+  const [arrivingAt, setArrivingAt] = useLocalStorage(
+    'arrivingAtName',
+    'Gløshaugen'
+  );
 
-  const [departingID, setDepartingID] = useState('NSR:StopPlace:60890');
-  const [arrivalID, setArrivalID] = useState('NSR:StopPlace:44085');
+  const [changeRoute, setChangeRoute] = useState(false);
+
+  const [departingFromID, setDepartingFromID] = useLocalStorage(
+    'departingFromID',
+    'NSR:StopPlace:60890'
+  );
+  const [arrivingAtID, setArrivingAtID] = useLocalStorage(
+    'arrivingAtID',
+    'NSR:StopPlace:44085'
+  );
 
   return (
     <RouteContex.Provider
@@ -23,35 +39,43 @@ function App() {
         setDepartingFrom,
         arrivingAt,
         setArrivingAt,
-        departingID,
-        setDepartingID,
-        arrivalID,
-        setArrivalID,
+        departingFromID,
+        setDepartingFromID,
+        arrivingAtID,
+        setArrivingAtID,
+        changeRoute,
+        setChangeRoute,
       }}
     >
-      <div className="App">
-        <div className="container">
-          <div className="header">
-            <h1>
-              {departingFrom} til {arrivingAt}
+      <ToggleChangeRoute />
+      {changeRoute ? (
+        <RouteForm />
+      ) : (
+        <div className="App">
+          <div className="container">
+            <div className="header">
+              <h1>
+                {departingFrom} til {arrivingAt}
+              </h1>
+              <h1 className="logo">{app_name}#</h1>
+            </div>
+            <h1 className="clock">
+              <Clock />
             </h1>
-            <h1 className="logo">{app_name}#</h1>
+            <div className="routesHeader">
+              <h3>Linje</h3>
+              <h3>Rute</h3>
+              <h3>Ankommer {departingFrom}</h3>
+              <h3>Ankommer {arrivingAt}</h3>
+            </div>
+            <hr />
+            <BusTimes
+              arrivingAtID={arrivingAtID}
+              departingFromID={departingFromID}
+            />
           </div>
-
-          <h1 className="clock">
-            <RouteForm />
-            <Clock />
-          </h1>
-          <div className="routesHeader">
-            <h3>Linje</h3>
-            <h3>Rute</h3>
-            <h3>Ankommer {departingFrom}</h3>
-            <h3>Ankommer {arrivingAt}</h3>
-          </div>
-          <hr />
-          <BusTimes arrivalID={arrivalID} departingID={departingID} />
         </div>
-      </div>
+      )}
     </RouteContex.Provider>
   );
 }

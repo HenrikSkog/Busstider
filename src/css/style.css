@@ -128,9 +128,32 @@ hr {
   margin: 10px 0 20px 0;
 }
 
-.autoCompleteSuggestion {
-  font-size: 0.3em;
+.changeRouteForm {
+  display: flex;
 }
+
+.inputWithAutoComplete {
+  position: relative;
+}
+
+.autoCompleteSuggestions {
+  display: flex;
+  flex-direction: column;
+}
+
+.autoCompleteSuggestion {
+  font-size: 1em;
+}
+
 .autoCompleteSuggestion:hover {
+  cursor: pointer;
+  color: rgb(211, 210, 210);
+}
+
+.toggleChangeRoute {
+  color: rgba(255, 255, 255, 0.527);
+}
+
+.pointer:hover {
   cursor: pointer;
 }

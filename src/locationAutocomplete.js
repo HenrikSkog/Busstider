@@ -8,7 +8,10 @@ export default async function locationAutocomplete(queryString) {
   const busFeatures = features
     .filter(feature => {
       try {
-        return feature.properties.source_id.slice(0, 14) === 'NSR:StopPlace:';
+        return (
+          feature.properties.source_id.slice(0, 14) === 'NSR:StopPlace:' &&
+          feature.properties.locality === 'Trondheim'
+        );
       } catch (e) {
         return false;
       }

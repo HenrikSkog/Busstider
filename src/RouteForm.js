@@ -1,55 +1,37 @@
 import React, { useState, useEffect, useContext } from 'react';
 import RouteContext from './RouteContext';
-import locationAutocomplete from './locationAutocomplete';
+import InputWithAutoComplete from './InputWithAutoComplete';
 
 export default function RouteForm() {
   const {
-    setDepartingID,
+    departingFrom,
     setDepartingFrom,
-    setArrivalID,
-    setArrivalFrom,
+    arrivingAt,
+    setArrivingAt,
+    departingFromID,
+    setDepartingFromID,
+    arrivingAtID,
+    setArrivingAtID,
+    changeRoute,
+    setChangeRoute,
   } = useContext(RouteContext);
 
-  const [autoComplete, setAutoComplete] = useState([]);
-
-  const [departingFromQuery, setDepartingFromQuery] = useState(
-    'Weidemannsveien'
-  );
-  const [arrivingAtQuery, setArrivingAtQuery] = useState('Høgskoleringen');
-
-  useEffect(() => {
-    async function getAutoComplete() {
-      const data = await locationAutocomplete(departingFromQuery);
-      setAutoComplete(data);
-    }
-    getAutoComplete();
-  }, [departingFromQuery, arrivingAtQuery]);
+  // prettier-ignore
   return (
-    <>
-      <input
-        type="text"
-        value={departingFromQuery}
-        onChange={e => setDepartingFromQuery(e.target.value)}
+    <div className="changeRouteForm">
+      <InputWithAutoComplete
+        setID={setDepartingFromID}
+        setName={setDepartingFrom}
+        initialValue={'Ila'}
       />
-      <input
-        type="text"
-        value={arrivingAtQuery}
-        onChange={e => setArrivingAtQuery(e.target.value)}
+      <InputWithAutoComplete
+        setID={setArrivingAtID}
+        setName={setArrivingAt}
+        initialValue={'Gløshaugen'}
       />
-      {autoComplete.map(feature => {
-        return (
-          <div
-            className="autoCompleteSuggestion"
-            key={feature.id}
-            onClick={() => {
-              setDepartingID(feature.id);
-              setDepartingFrom(feature.name);
-            }}
-          >
-            {`${feature.name}, ${feature.city}`}
-          </div>
-        );
-      })}
-    </>
+      <button type="button" onClick={() => setChangeRoute(!changeRoute)} style={{alignSelf: "baseline"}}>
+        Bekreft
+      </button>
+    </div>
   );
 }
