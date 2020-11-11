@@ -1,7 +1,7 @@
 import BusTimes from './BusTimes';
 import Clock from './Clock';
 import './css/style.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RouteForm from './RouteForm';
 import RouteContex from './RouteContext';
 import ToggleChangeRoute from './ToggleChangeRoute';
@@ -11,6 +11,12 @@ import TimeTable from './TimeTable';
 // Endre disse til egne verdier
 
 function App() {
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      console.log(position);
+    });
+  }, []);
+
   const app_name = 'Busstider';
   // custom hook thats equivalent to useState, but persists state in localstorage. Arugments taken are local storage key and initial state value
   const [departingFrom, setDepartingFrom] = useLocalStorage(
@@ -58,9 +64,9 @@ function App() {
             </h1>
             <h1 className="logo">{app_name}#</h1>
           </div>
-          <h1 className="clock">
+          <div className="clock">
             <Clock />
-          </h1>
+          </div>
           <TimeTable
             departingFrom={departingFrom}
             departingFromID={departingFromID}
