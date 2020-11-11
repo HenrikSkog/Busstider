@@ -6,6 +6,7 @@ import RouteForm from './RouteForm';
 import RouteContex from './RouteContext';
 import ToggleChangeRoute from './ToggleChangeRoute';
 import useLocalStorage from './useLocalStorage';
+import TimeTable from './TimeTable';
 
 // Endre disse til egne verdier
 
@@ -48,34 +49,26 @@ function App() {
       }}
     >
       <ToggleChangeRoute />
-      {changeRoute ? (
-        <RouteForm />
-      ) : (
-        <div className="App">
-          <div className="container">
-            <div className="header">
-              <h1>
-                {departingFrom} til {arrivingAt}
-              </h1>
-              <h1 className="logo">{app_name}#</h1>
-            </div>
-            <h1 className="clock">
-              <Clock />
+      {changeRoute && <RouteForm />}
+      <div className="App">
+        <div className="container">
+          <div className="header">
+            <h1>
+              {departingFrom} til {arrivingAt}
             </h1>
-            <div className="routesHeader">
-              <h3>Linje</h3>
-              <h3>Rute</h3>
-              <h3>Ankommer {departingFrom}</h3>
-              <h3>Ankommer {arrivingAt}</h3>
-            </div>
-            <hr />
-            <BusTimes
-              arrivingAtID={arrivingAtID}
-              departingFromID={departingFromID}
-            />
+            <h1 className="logo">{app_name}#</h1>
           </div>
+          <h1 className="clock">
+            <Clock />
+          </h1>
+          <TimeTable
+            departingFrom={departingFrom}
+            departingFromID={departingFromID}
+            arrivingAt={arrivingAt}
+            arrivingAtID={arrivingAtID}
+          />
         </div>
-      )}
+      </div>
     </RouteContex.Provider>
   );
 }

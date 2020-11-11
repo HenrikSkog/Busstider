@@ -18,13 +18,18 @@ export default function RouteForm() {
       <InputWithAutoComplete
         setID={setDepartingFromID}
         setName={setDepartingFrom}
-        initialValue={'Ila'}
+        initialValue={''}
+        inputProps= {
+          {placeholder: "Fra her"}
+        }
       />
       <InputWithAutoComplete
         setID={setArrivingAtID}
         setName={setArrivingAt}
-        initialValue={'Gløshaugen'}
-      />
+        initialValue={''}
+      inputProps= {
+        {placeholder: "Til her"}
+      }/>
       <button type="button" onClick={() => setChangeRoute(!changeRoute)} style={{alignSelf: "baseline"}}>
         Bekreft
       </button>

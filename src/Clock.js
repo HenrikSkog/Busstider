@@ -10,5 +10,5 @@ export default function Clock() {
     return () => clearInterval(updateClock);
   }, [clock]);
 
-  return <div>{clock.toTimeString().slice(0, 8)}</div>;
+  return <div className="clock">{clock.toTimeString().slice(0, 8)}</div>;
 }

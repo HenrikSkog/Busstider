@@ -1,18 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import locationAutocomplete from './locationAutocomplete';
 
 export default function InputWithAutoComplete(props) {
   const [autoCompleteSuggestions, setAutoCompleteSuggestions] = useState([]);
   const [input, setInput] = useState(props.initialValue);
 
-  console.log(input);
-
   useEffect(() => {
     async function getAutoComplete() {
       const data = await locationAutocomplete(input);
       setAutoCompleteSuggestions(data);
     }
-    getAutoComplete();
+    // runs the api call if there is an input
+    if (input) getAutoComplete();
   }, [input]);
 
   return (
@@ -21,6 +20,7 @@ export default function InputWithAutoComplete(props) {
         type="text"
         value={input}
         onChange={e => setInput(e.target.value)}
+        {...props.inputProps}
       />
       <div className="autoCompleteSuggestions">
         {autoCompleteSuggestions.map(({ id, name, city }, index) => (
