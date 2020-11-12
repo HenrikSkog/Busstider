@@ -1,5 +1,4 @@
 import BusTimes from './BusTimes';
-import Clock from './Clock';
 import './css/style.css';
 import React from 'react';
 

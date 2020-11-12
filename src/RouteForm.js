@@ -8,8 +8,6 @@ export default function RouteForm() {
     setArrivingAt,
     setDepartingFromID,
     setArrivingAtID,
-    changeRoute,
-    setChangeRoute,
   } = useContext(RouteContext);
 
   // prettier-ignore
@@ -30,9 +28,6 @@ export default function RouteForm() {
       inputProps= {
         {placeholder: "Til her"}
       }/>
-      <button type="button" onClick={() => setChangeRoute(!changeRoute)} style={{alignSelf: "baseline"}}>
-        Bekreft
-      </button>
     </div>
   );
 }
