@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import RouteForm from './RouteForm';
 import ToggleChangeRoute from './ToggleChangeRoute';
 import TimeTable from './TimeTable';
-import RouteContext, { RouteContextProvider } from './RouteContext';
+import RouteContext from './RouteContext';
 
 // Endre disse til egne verdier
 
@@ -17,10 +17,16 @@ function App() {
 
   const app_name = 'Busstider';
 
-  const { changeRoute } = useContext(RouteContext);
+  const {
+    arrivingAt,
+    departingFrom,
+    departingFromID,
+    arrivingAtID,
+    changeRoute,
+  } = useContext(RouteContext);
 
   return (
-    <RouteContextProvider>
+    <>
       <ToggleChangeRoute />
       {changeRoute && <RouteForm />}
       <div className="App">
@@ -42,7 +48,7 @@ function App() {
           />
         </div>
       </div>
-    </RouteContextProvider>
+    </>
   );
 }
 

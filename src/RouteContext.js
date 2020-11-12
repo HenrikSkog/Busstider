@@ -14,8 +14,6 @@ export function RouteContextProvider({ children }) {
     'Gløshaugen'
   );
 
-  const [changeRoute, setChangeRoute] = useState(false);
-
   const [departingFromID, setDepartingFromID] = useLocalStorage(
     'departingFromID',
     'NSR:StopPlace:60890'
@@ -24,6 +22,9 @@ export function RouteContextProvider({ children }) {
     'arrivingAtID',
     'NSR:StopPlace:44085'
   );
+
+  const [changeRoute, setChangeRoute] = useState(false);
+
   return (
     <RouteContex.Provider
       value={{
