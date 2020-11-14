@@ -36,3 +36,9 @@ export default function useLocalStorage(key, initialValue) {
 
   return [storedValue, setValue];
 }
+
+
+export function getLocalStorage(key, initialValue) {
+  const item = window.localStorage.getItem(key)
+  return item ? JSON.parse(item) : initialValue;
+}
