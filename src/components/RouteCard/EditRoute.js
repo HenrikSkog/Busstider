@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
-import InputWithAutoComplete from './InputWithAutoComplete';
-import Context from './Context';
+import InputWithAutoComplete from '../InputWithAutoComplete';
+import Context from '../Context';
 
 export default function EditRoute({ id }) {
   const { dispatch } = useContext(Context);

@@ -1,6 +1,9 @@
 import React, { useReducer, useEffect } from 'react';
 import { v1 as uuidv1 } from 'uuid';
-import { setOrGetLocalStorage, setLocalStorage } from './useLocalStorage';
+import {
+  setOrGetLocalStorage,
+  setLocalStorage,
+} from '../hooks/useLocalStorage';
 
 const initalState = setOrGetLocalStorage('state', {
   routes: [

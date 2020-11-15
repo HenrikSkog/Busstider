@@ -1,9 +1,9 @@
-import './css/style.css';
+import '../css/style.css';
 import React, { useContext } from 'react';
 import Context from './Context';
-import BigRoute from './BigRoute';
+import RouteCard from './RouteCard';
 import Clock from './Clock';
-import NewRoute from './NewRoute';
+import NewRoute from './RouteCard/NewRoute';
 
 function App() {
   const { state } = useContext(Context);
@@ -14,7 +14,7 @@ function App() {
           <h1 className="logo">Busskjerm#</h1>
           <Clock />
           {state.routes.map(route => (
-            <BigRoute key={route.id} route={route} />
+            <RouteCard key={route.id} route={route} />
           ))}
           <NewRoute />
         </div>

@@ -1,5 +1,4 @@
 import BusTimes from './BusTimes';
-import './css/style.css';
 import React from 'react';
 
 export default function TimeTable({ route }) {
