@@ -1,13 +1,13 @@
 import React, { useState, useContext } from 'react';
-import InputWithAutoComplete from '../InputWithAutoComplete';
-import Context from '../Context';
+import InputWithAutoComplete from '../../InputWithAutoComplete';
+import Context from '../../Context';
 
-export default function EditRoute({ id }) {
+export default function EditRouteForm({ id }) {
   const { dispatch } = useContext(Context);
   const [route, setRoute] = useState({});
 
   return (
-    <div className="editRouteContainer">
+    <div className="EditRouteFormContainer">
       <InputWithAutoComplete
         routeID={id}
         route={route}
