@@ -11,7 +11,7 @@ function App() {
     <>
       <div className="App">
         <div className="container">
-          <h1 className="logo">Bussruter#</h1>
+          <h1 className="logo">Busskjerm#</h1>
           <Clock />
           {state.routes.map(route => (
             <BigRoute key={route.id} route={route} />
