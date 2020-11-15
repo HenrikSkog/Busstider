@@ -1,9 +1,7 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import locationAutocomplete from './locationAutocomplete';
-import Context from './Context';
 
 export default function InputWithAutoComplete({
-  routeID,
   route,
   setRoute,
   inputProps,
