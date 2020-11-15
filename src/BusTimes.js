@@ -8,8 +8,9 @@ const service = createEnturService({
 
 // Endre dette til lengden på turen
 const routeLength = 10;
+const numberOfStops = 5;
 
-const BusTimes = props => {
+const BusTimes = ({ route }) => {
   const [busStations, setBusStations] = useState([]);
 
   useEffect(() => {
@@ -21,10 +22,10 @@ const BusTimes = props => {
         https://developer.entur.org/pages-geocoder-intro
         
           */
-        props.departingFromID,
-        props.arrivingAtID,
+        route.departing.id,
+        route.arriving.id,
         // Viser her 9 resultat; endre dette om ønskelig
-        { limit: 9 }
+        { limit: numberOfStops }
       );
       setBusStations(stops);
     }
@@ -33,15 +34,15 @@ const BusTimes = props => {
     const newStopsInterval = setInterval(generateStops, 5000);
 
     return () => clearInterval(newStopsInterval);
-  }, [props.departingFromID, props.arrivingAtID]);
+  }, [route.departing.id, route.arriving.id]);
 
   return (
     <div className="routes">
-      {busStations.map(route => {
+      {busStations.map(routeItem => {
         return (
           <Route
-            key={route.serviceJourney.id}
-            route={route}
+            key={routeItem.serviceJourney.id}
+            route={routeItem}
             routeLength={routeLength}
           />
         );

@@ -2,22 +2,17 @@ import BusTimes from './BusTimes';
 import './css/style.css';
 import React from 'react';
 
-export default function TimeTable({
-  departingFrom,
-  departingFromID,
-  arrivingAt,
-  arrivingAtID,
-}) {
+export default function TimeTable({ route }) {
   return (
-    <div className="container">
+    <div className="spesificRouteContainer">
       <div className="routesHeader">
         <h3>Linje</h3>
         <h3>Rute</h3>
-        <h3>Ankommer {departingFrom}</h3>
-        <h3>Ankommer {arrivingAt}</h3>
+        <h3>Ankommer {route.departing.name}</h3>
+        <h3>Ankommer {route.arriving.name}</h3>
       </div>
       <hr />
-      <BusTimes arrivingAtID={arrivingAtID} departingFromID={departingFromID} />
+      <BusTimes route={route} />
     </div>
   );
 }

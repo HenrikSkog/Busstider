@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import RouteContex from './RouteContext';
+import Context from './Context';
 
 export default function ToggleChangeRoute() {
-  const { setChangeRoute, changeRoute } = useContext(RouteContex);
+  const { dispatch } = useContext(Context);
 
   return (
     <div
-      onClick={() => setChangeRoute(!changeRoute)}
+      onClick={() => dispatch({ type: 'TOGGLECHANGEROUTE' })}
       className="toggleChangeRoute pointer"
     >
       Bytt rute

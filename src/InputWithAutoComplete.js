@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import locationAutocomplete from './locationAutocomplete';
+import Context from './Context';
 
-export default function InputWithAutoComplete(props) {
+export default function InputWithAutoComplete({
+  routeID,
+  route,
+  setRoute,
+  inputProps,
+  stopType,
+}) {
   const [autoCompleteSuggestions, setAutoCompleteSuggestions] = useState([]);
-  const [input, setInput] = useState(props.initialValue);
+  const [input, setInput] = useState('');
 
   useEffect(() => {
     async function getAutoComplete() {
@@ -20,19 +27,16 @@ export default function InputWithAutoComplete(props) {
         type="text"
         value={input}
         onChange={e => setInput(e.target.value)}
-        {...props.inputProps}
+        {...inputProps}
       />
       <div className="autoCompleteSuggestions">
-        {autoCompleteSuggestions.map(({ id, name, city }, index) => (
+        {autoCompleteSuggestions.map(({ id, name, city }) => (
           <div
             className="autoCompleteSuggestion"
             key={id}
             onClick={() => {
-              // setting the stop id and stop name
-              props.setID(id);
-              props.setName(name);
+              setRoute({ ...route, [stopType]: { id: id, name: name } });
               setInput(name);
-              setAutoCompleteSuggestions([]);
             }}
           >
             {`\u27A3 ${name}, ${city}`}
