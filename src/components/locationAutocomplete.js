@@ -1,4 +1,4 @@
-export default async function locationAutocomplete(queryString) {
+export default async function locationAutocomplete(queryString, city) {
   const results = await fetch(
     `https://api.entur.io/geocoder/v1/autocomplete?text=${queryString}&size=20&lang=no`
   );
@@ -10,7 +10,7 @@ export default async function locationAutocomplete(queryString) {
       try {
         return (
           feature.properties.source_id.slice(0, 14) === 'NSR:StopPlace:' &&
-          feature.properties.locality === 'Trondheim'
+          feature.properties.locality === city
         );
       } catch (e) {
         return false;

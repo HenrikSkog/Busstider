@@ -23,6 +23,7 @@ export default function EditRouteForm({ id }) {
         stopType="arriving"
       />
       <button
+        className="btn pointer"
         onClick={() =>
           dispatch({ type: 'make edit', payload: { route: route, id: id } })
         }

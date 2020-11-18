@@ -192,6 +192,13 @@ hr {
   margin-top: 1em;
 }
 
+.btn {
+  align-self: baseline;
+  padding: 0.5rem 0.8rem;
+  border: none;
+  border-radius: 0.3rem;
+}
+
 @media only screen and (max-width: 600px) {
   body {
   }

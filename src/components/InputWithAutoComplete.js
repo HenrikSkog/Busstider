@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import Context from './Context';
 import locationAutocomplete from './locationAutocomplete';
 
 export default function InputWithAutoComplete({
@@ -9,10 +10,11 @@ export default function InputWithAutoComplete({
 }) {
   const [autoCompleteSuggestions, setAutoCompleteSuggestions] = useState([]);
   const [input, setInput] = useState('');
+  const { state } = useContext(Context);
 
   useEffect(() => {
     async function getAutoComplete() {
-      const data = await locationAutocomplete(input);
+      const data = await locationAutocomplete(input, state.city);
       setAutoCompleteSuggestions(data);
     }
     // runs the api call if there is an input

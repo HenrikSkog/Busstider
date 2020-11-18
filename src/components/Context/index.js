@@ -20,6 +20,11 @@ const initalState = setOrGetLocalStorage('state', {
       beingEdited: false,
     },
   ],
+  city: {
+    name: 'Trondheim',
+    lat: 63.43,
+    lon: 10.395,
+  },
 });
 
 const reducer = (state, action) => {
@@ -59,6 +64,15 @@ const reducer = (state, action) => {
           }
           return route;
         }),
+      };
+    case 'change city':
+      return {
+        ...state,
+        city: {
+          name: action.payload.name,
+          lat: action.payload.lat,
+          lon: action.payload.lon,
+        },
       };
     default:
       console.error('Reducer did not get known type');

@@ -4,7 +4,7 @@ import Context from './Context';
 import RouteCard from './RouteCard';
 import Clock from './Clock';
 import NewRoute from './RouteCard/NewRoute';
-import Leaflet from './Leaflet';
+import Map from './Map';
 
 function App() {
   const { state } = useContext(Context);
@@ -19,7 +19,7 @@ function App() {
           ))}
           <NewRoute />
         </div>
-        <Leaflet />
+        <Map />
       </div>
     </>
   );
