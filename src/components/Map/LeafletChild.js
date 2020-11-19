@@ -10,10 +10,6 @@ export default function LeafletChild({ busLocations }) {
     map.flyTo([state.city.lat, state.city.lon], 14);
   }, [state.city]);
 
-  useMapEvent('click', () => {
-    map.setCenter([state.city.lat, state.city.lon]);
-  });
-
   return (
     <>
       <TileLayer
@@ -21,11 +17,11 @@ export default function LeafletChild({ busLocations }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {busLocations.map((bus, i) => {
-        if (bus.pos[0] && bus.pos[1]) {
+        if (bus.lat && bus.lon) {
           return (
-            <Marker position={bus.pos} key={i}>
+            <Marker position={[bus.lat, bus.lon]} key={bus.id}>
               <Popup>
-                {bus.lineNumber}: {bus.destinationName}
+                {bus.lineNumber}: {bus.routeName}
               </Popup>
             </Marker>
           );

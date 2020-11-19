@@ -1,44 +1,43 @@
+import xmlToJson from '../helpers/xmlToJson';
+
 export default async function getBusLocations() {
   const result = await fetch(
-    'https://api.entur.io/realtime/v1/rest/vm?datasetId=ATB'
-  );
-  const parser = new DOMParser();
-  const data = await result.text();
-  const xmlData = parser.parseFromString(data, 'text/xml');
-
-  const busesXML = xmlData.querySelectorAll(
-    'Siri > ServiceDelivery > VehicleMonitoringDelivery > VehicleActivity'
-  );
-
-  console.log(xmlData);
-  let busesObjects = [];
-  for (let i = 0; i < busesXML.length; i++) {
-    let lon = busesXML[i].querySelector(
-      'MonitoredVehicleJourney > VehicleLocation > Longitude'
-    );
-    let lat = busesXML[i].querySelector(
-      'MonitoredVehicleJourney > VehicleLocation > Latitude'
-    );
-
-    let lineNumber = busesXML[i].querySelector(
-      'MonitoredVehicleJourney > PublishedLineName'
-    );
-
-    let destinationName = busesXML[i].querySelector(
-      'MonitoredVehicleJourney > DestinationName'
-    );
-
-    if (lon) lon = Number(lon.textContent);
-    if (lat) lat = Number(lat.textContent);
-    if (lineNumber) lineNumber = lineNumber.textContent;
-    if (destinationName) destinationName = destinationName.textContent;
-
-    let bus = { pos: [lat, lon], lineNumber, destinationName };
-
-    if (lon && lat) {
-      console.log('skjer');
-      busesObjects = [...busesObjects, bus];
+    'https://api.entur.io/realtime/v1/rest/vm?datasetId=KOL',
+    {
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/xml',
+      },
     }
-  }
-  return busesObjects;
+  );
+  const rawData = await result.text();
+  const dataXML = new DOMParser().parseFromString(rawData, 'text/xml');
+  // returns: data, array with all buses
+  const {
+    Siri: {
+      ServiceDelivery: {
+        VehicleMonitoringDelivery: { VehicleActivity: data },
+      },
+    },
+  } = xmlToJson(dataXML);
+
+  const busesWithLocation = data
+    .map(bus => {
+      if (
+        Object.keys(bus.MonitoredVehicleJourney.VehicleLocation).length === 2
+      ) {
+        let busKey = bus.MonitoredVehicleJourney;
+        return {
+          lat: busKey.VehicleLocation.Latitude,
+          lon: busKey.VehicleLocation.Longitude,
+          lineNumber: busKey.PublishedLineName,
+          id: busKey.VehicleRef,
+          routeName: busKey.RouteRef,
+        };
+      }
+      // check that bus is defined
+    })
+    .filter(bus => bus);
+
+  return busesWithLocation;
 }

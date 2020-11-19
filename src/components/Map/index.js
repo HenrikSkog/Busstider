@@ -7,6 +7,7 @@ import LeafletChild from './LeafletChild';
 
 export default function Leaflet() {
   const [busLocations, setBusLocations] = useState([]);
+  const [busInterval, setBusInterval] = useState(true);
   const { state, dispatch } = useContext(Context);
   const cityRef = useRef();
 
@@ -19,8 +20,16 @@ export default function Leaflet() {
   }
 
   async function handleGetBuses() {
-    const busesObjects = getBusLocations();
-    setBusLocations(busesObjects);
+    const busesObjects = await getBusLocations();
+    if (busesObjects) setBusLocations(busesObjects);
+  }
+
+  async function startBusInterval() {
+    setBusInterval(true);
+    console.log('Bus interal function is ran');
+    await handleGetBuses();
+    console.log('Got buses');
+    if (busInterval) setTimeout(startBusInterval, 5000);
   }
 
   async function handleChangeCity() {
@@ -39,7 +48,8 @@ export default function Leaflet() {
 
   return (
     <>
-      <button onClick={handleGetBuses}>Skaff resultater</button>
+      <button onClick={startBusInterval}>Start</button>
+      <button onClick={() => setBusInterval(false)}>Slutt</button>
       <button onClick={geoFetch}>Skaff koordinater</button>
       <input ref={cityRef} />
       <button onClick={handleChangeCity}>Bytt by</button>
