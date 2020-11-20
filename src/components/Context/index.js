@@ -86,6 +86,7 @@ export function ContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initalState);
 
   useEffect(() => {
+    console.log(state);
     setLocalStorage('state', state);
   }, [state]);
 

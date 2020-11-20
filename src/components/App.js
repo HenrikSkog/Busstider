@@ -19,7 +19,7 @@ function App() {
           ))}
           <NewRoute />
         </div>
-        <Map />
+        {/* <Map /> */}
       </div>
     </>
   );
