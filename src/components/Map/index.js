@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
+import React, { useState, useContext, useRef } from 'react';
+import { MapContainer } from 'react-leaflet';
 import Context from '../Context';
 import geocodeFetch from '../geocodeFetch';
 import getBusLocations from './getBusLocations';

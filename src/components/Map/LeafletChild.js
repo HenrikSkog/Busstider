@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Marker, Popup, TileLayer, useMap, useMapEvent } from 'react-leaflet';
+import { Marker, Popup, TileLayer, useMap } from 'react-leaflet';
 import Context from '../Context';
 
 export default function LeafletChild({ busLocations }) {
@@ -8,7 +8,7 @@ export default function LeafletChild({ busLocations }) {
 
   useEffect(() => {
     map.flyTo([state.city.lat, state.city.lon], 14);
-  }, [state.city]);
+  }, [state.city, map]);
 
   return (
     <>
@@ -25,6 +25,8 @@ export default function LeafletChild({ busLocations }) {
               </Popup>
             </Marker>
           );
+        } else {
+          return null;
         }
       })}
     </>

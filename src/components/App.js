@@ -4,7 +4,6 @@ import Context from './Context';
 import RouteCard from './RouteCard';
 import Clock from './Clock';
 import NewRoute from './RouteCard/NewRoute';
-import Map from './Map';
 
 function App() {
   const { state } = useContext(Context);

@@ -34,6 +34,8 @@ export default async function getBusLocations() {
           id: busKey.VehicleRef,
           routeName: busKey.RouteRef,
         };
+      } else {
+        return undefined;
       }
       // check that bus is defined
     })

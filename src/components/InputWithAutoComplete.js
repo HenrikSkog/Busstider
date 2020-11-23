@@ -19,7 +19,7 @@ export default function InputWithAutoComplete({
     }
     // runs the api call if there is an input
     if (input) getAutoComplete();
-  }, [input]);
+  }, [input, state.city.name]);
 
   return (
     <div className="inputWithAutoComplete">
