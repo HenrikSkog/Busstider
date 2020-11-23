@@ -14,7 +14,7 @@ export default function InputWithAutoComplete({
 
   useEffect(() => {
     async function getAutoComplete() {
-      const data = await locationAutocomplete(input, state.city);
+      const data = await locationAutocomplete(input, state.city.name);
       setAutoCompleteSuggestions(data);
     }
     // runs the api call if there is an input

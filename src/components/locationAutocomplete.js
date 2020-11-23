@@ -3,6 +3,8 @@ export default async function locationAutocomplete(queryString, city) {
     `https://api.entur.io/geocoder/v1/autocomplete?text=${queryString}&size=20&lang=no`
   );
 
+  console.log(results);
+
   const { features } = await results.json();
 
   const busFeatures = features

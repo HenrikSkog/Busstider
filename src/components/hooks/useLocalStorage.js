@@ -48,14 +48,6 @@ export function setOrGetLocalStorage(key, initialValue) {
     const item = window.localStorage.getItem(key);
     // Parse stored json or if none return initialValue
 
-    if (item) {
-      const localStorageKeys = Object.keys(JSON.parse(item));
-      const initialValueKeys = Object.keys(initialValue);
-
-      console.log(localStorageKeys);
-      console.log(initialValueKeys);
-    }
-
     return item ? JSON.parse(item) : initialValue;
   } catch (error) {
     // If error also return initialValue
