@@ -77,7 +77,6 @@ const reducer = (state, action) => {
     default:
       console.error('Reducer did not get known type');
   }
-  console.log(state);
 };
 
 const Context = React.createContext(initalState);
@@ -86,7 +85,6 @@ export function ContextProvider({ children }) {
   const [state, dispatch] = useReducer(reducer, initalState);
 
   useEffect(() => {
-    console.log(state);
     setLocalStorage('state', state);
   }, [state]);
 

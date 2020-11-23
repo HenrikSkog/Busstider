@@ -15,24 +15,27 @@ const BusTimes = ({ route }) => {
 
   useEffect(() => {
     async function generateStops() {
-      const stops = await service.getDeparturesBetweenStopPlaces(
-        /*
-        
-        Finn ID til dine stoppesteder her:
-        https://developer.entur.org/pages-geocoder-intro
-        
-          */
-        route.departing.id,
-        route.arriving.id,
-        // Viser her 9 resultat; endre dette om ønskelig
-        { limit: numberOfStops }
-      );
-      setBusStations(stops);
+      try {
+        const stops = await service.getDeparturesBetweenStopPlaces(
+          /*
+          
+          Finn ID til dine stoppesteder her:
+          https://developer.entur.org/pages-geocoder-intro
+          
+            */
+          route.departing.id,
+          route.arriving.id,
+          // Viser her 9 resultat; endre dette om ønskelig
+          { limit: numberOfStops }
+        );
+        setBusStations(stops);
+      } catch (error) {
+        console.log('Error while fetching stops, msg: ', error);
+      }
     }
-
     generateStops();
     const newStopsInterval = setInterval(generateStops, 5000);
-
+    console.log(route);
     return () => clearInterval(newStopsInterval);
   }, [route.departing.id, route.arriving.id]);
 
