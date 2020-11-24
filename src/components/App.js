@@ -13,7 +13,7 @@ function App() {
         '----------------------' +
         JSON.stringify(localStorage.getItem('state'))
     );
-  }, []);
+  }, [state]);
   return (
     <>
       <div className="App">

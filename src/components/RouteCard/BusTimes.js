@@ -37,7 +37,7 @@ const BusTimes = ({ route }) => {
     const newStopsInterval = setInterval(generateStops, 5000);
     console.log(route);
     return () => clearInterval(newStopsInterval);
-  }, [route.departing.id, route.arriving.id]);
+  }, [route]);
 
   return (
     <div className="routes">
