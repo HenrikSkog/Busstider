@@ -16,7 +16,7 @@ export default function RouteCardHeader({ route }) {
             dispatch({ type: 'delete', payload: { id: route.id } })
           }
         >
-          &#9881;
+          &#128465;
         </span>
       </div>
     </div>
