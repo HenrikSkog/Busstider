@@ -143,6 +143,12 @@ hr {
   margin: 10px 0 20px 0;
 }
 
+/* route container */
+.routeContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min-content, 400px));
+}
+
 /* change route / new route part */
 /* change */
 .EditRouteFormContainer {
