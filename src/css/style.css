@@ -68,6 +68,7 @@ body {
     0 16px 32px rgba(0, 0, 0, 0.07), 0 32px 64px rgba(0, 0, 0, 0.07);
   padding: 30px 40px;
   transition: 0.3s transform;
+  background: #2f2f2f4a;
 }
 
 .spesificRouteOuterContainer:hover {
@@ -77,9 +78,6 @@ body {
 .spesificRouteOuterContainer > .header {
   display: flex;
   justify-content: space-between;
-}
-
-.spesificRouteOuterContainer > .header > .delete {
 }
 
 .routeIcon {
@@ -146,7 +144,9 @@ hr {
 /* route container */
 .routeContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min-content, 400px));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 320px));
+  justify-content: center;
+  gap: 10px;
 }
 
 /* change route / new route part */
